@@ -20,6 +20,8 @@
 3. 方阵和 2026/10/3
 4. 高楼 2026/10/3
 5. 数和 2026/10/5
+6. 黑白 2026/10/13
+7. 黑白+ 2026/10/13
 
 ## 🗺️ 后续计划
 1. [ ] 实现更多谜题的求解器；
@@ -53,6 +55,8 @@ Daily/Weekly/Monthly Challenges: (Early solvers do not yet have an automatic cra
 3. kakurasu
 4. skyscrapers
 5. kakuro
+6. binairo
+7. binairo+
 
 ## 🗺️ Pie in the Sky
 1. [ ] Implement more puzzle solvers;
