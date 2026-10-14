@@ -22,6 +22,7 @@
 5. 数和 2026/10/5
 6. 黑白 2026/10/13
 7. 黑白+ 2026/10/13
+8. 星之战 2026/10/14
 
 ## 🗺️ 后续计划
 1. [ ] 实现更多谜题的求解器；
@@ -29,7 +30,7 @@
 3. [ ] 统一各个求解器的规范，如输出信息、可视化页面等。
 
 ## 🔵 其他
-1. 本仓库纯属自娱自乐，你（若真的有人来看）可能会发现各种离谱内容；
+1. 本仓库纯属自娱自乐，你（若真的有人来看）可能会发现各种离谱内容；虽然该求解器相对很慢，但你不应该用它来进行人类账号竞速；
 2. 求解器目前只写到恰能求解网站的每日/每周/每月挑战的水平，可能无法完全求解更高难度的谜题；
 3. 前端 DOM 数据提取器（.js）由 AI 辅助逆向并生成。
 
@@ -57,6 +58,7 @@ Daily/Weekly/Monthly Challenges: (Early solvers do not yet have an automatic cra
 5. kakuro
 6. binairo
 7. binairo+
+8. starbattle
 
 ## 🗺️ Pie in the Sky
 1. [ ] Implement more puzzle solvers;
@@ -64,6 +66,6 @@ Daily/Weekly/Monthly Challenges: (Early solvers do not yet have an automatic cra
 3. [ ] Standardize the specifications of various solvers, such as output information and visualization pages.
 
 ## 🔵 Notes
-1. This repository is purely for my own amusement; you (if anyone actually visits) might find all sorts of outrageous content;
+1. This repository is purely for my own amusement; you (if anyone actually visits) might find all sorts of outrageous content;Although this solver is relatively slow, you should not use it for human account speedruns;
 2. The solver is currently only capable of solving the daily/weekly/monthly challenges on the website, and may not be able to fully solve puzzles of higher difficulty.
 3. DOM extraction scripts assisted by AI.
