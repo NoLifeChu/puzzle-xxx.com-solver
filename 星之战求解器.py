@@ -121,7 +121,7 @@ def fetch_star_battle(url="https://www.puzzle-star-battle.com/"):
             }
             let pageText = document.title + " " + document.body.innerText.slice(0, 500);
 
-            return { size: width, regions: regionMatrix };
+            return { size: width, stars: stars, regions: regionMatrix };
         }""")
 
         browser.close()
@@ -344,8 +344,13 @@ size = 17
 stars = 4
 regions = [[0,1,1,1,1,1,1,1,1,2,2,2,2,2,3,3,3],[0,1,1,1,1,1,1,1,4,4,4,5,5,2,3,3,3],[0,0,0,1,4,4,4,4,4,4,4,5,5,2,3,3,3],[0,0,0,0,4,4,6,4,4,4,5,5,5,2,3,3,3],[0,0,0,0,4,4,6,4,4,4,4,5,7,7,7,7,3],[0,0,0,0,6,6,6,4,4,5,5,5,7,7,7,7,3],[0,0,8,0,0,0,6,6,6,5,5,5,7,7,7,3,3],[8,0,8,0,0,0,9,9,5,5,5,5,7,7,7,3,3],[8,8,8,8,8,8,9,10,10,5,5,5,5,7,3,3,3],[11,11,9,9,9,9,9,9,10,5,5,5,5,5,12,3,12],[11,9,9,9,9,9,9,10,10,10,10,13,13,13,12,12,12],[11,11,9,9,9,9,9,9,14,14,10,15,13,13,13,12,12],[11,9,9,9,9,9,9,14,14,10,10,15,13,13,13,13,12],[11,11,9,9,9,9,9,14,14,14,15,15,15,13,13,13,12],[11,9,9,9,16,16,16,14,15,15,15,14,13,13,13,13,13],[11,9,16,9,16,14,14,14,14,14,14,14,13,13,13,13,13],[16,16,16,16,16,14,14,14,14,14,14,14,14,13,13,13,13]]
 
+#极难的谜题
+size = 17
+stars = 4
+regions = [[0,0,0,0,0,1,1,1,1,1,2,2,2,3,3,3,3],[0,0,0,0,4,1,1,2,2,2,2,2,2,2,2,3,3],[0,0,0,0,4,1,1,2,1,1,2,2,2,2,2,2,3],[0,0,0,4,4,1,1,1,1,5,5,2,2,2,2,3,3],[0,0,0,4,1,1,1,5,5,5,5,6,6,6,2,2,3],[7,0,7,4,4,4,1,5,5,5,5,6,8,8,2,2,3],[7,7,7,7,7,5,5,5,5,5,5,6,8,8,8,8,8],[7,7,7,7,7,9,9,9,9,5,9,6,10,10,10,8,8],[7,7,7,7,7,9,11,11,9,9,9,6,10,10,10,10,8],[7,7,7,7,7,9,11,12,12,9,9,6,6,6,10,10,8],[7,7,7,7,7,9,11,11,12,12,9,9,6,6,10,10,10],[13,7,11,7,11,9,9,11,14,12,12,12,12,6,10,10,10],[13,7,11,11,11,11,11,11,14,15,15,15,12,10,10,10,10],[13,13,13,11,16,16,11,11,14,15,15,15,12,12,10,10,10],[13,13,16,16,16,16,16,16,14,15,15,15,15,12,12,12,10],[13,13,16,16,16,16,16,14,14,15,15,15,12,12,10,10,10],[13,16,16,16,16,16,14,14,14,15,15,15,15,15,15,15,10]]
+
+
 size,stars,regions=fetch_star_battle(url="https://cn.puzzle-star-battle.com/?size=9")
-print(stars)
 
 grid = [[-1]*size for _ in range(size)]
 divided=set()#(类别,编号)
@@ -356,7 +361,7 @@ pairs=[]
 effect=1
 while effect>0:
     effect=0
-    for i in range(size):#区域考虑
+    for i in range(size):#区域考虑，Starbattle E=?
         if (2,i) not in divided:#还活着
             aim=[]#包含这个宫格所有活着的坐标元组
             left_stars=stars
@@ -371,8 +376,26 @@ while effect>0:
                 divided.add((2,i))
                 for j in divide_result:
                     pairs.append(j)
-            else:#是否存在数对
-                effect+=pairs_divide(aim,left_stars)
+            else:#融入数对
+                if pairs_divide(aim,left_stars)>0:
+                    effect+=pairs_divide(aim,left_stars)
+                else:#弱化版一步假设
+                    divide_result=divide(aim,left_stars+1)
+                    if divide_result:#只多一个
+                        for x in range(size):
+                            for y in range(size):
+                                if grid[y][x]==-1:
+                                    aim1=aim[:]
+                                    for j in aim1[:]:
+                                        if -1<=j[0]-y<=1 and -1<=j[1]-x<=1:
+                                            aim1.remove(j)
+                                    if regions[y][x]!=i:#如果不在，只需要扣1；在的话需要扣2
+                                        divide_result=divide(aim1,left_stars-1)
+                                    else:
+                                        divide_result=divide(aim1,left_stars-2)
+                                    if divide_result:#减没了！
+                                        grid[y][x]=0
+                                        effect+=1
 
 
     for y in range(size):#单行考虑
@@ -389,8 +412,24 @@ while effect>0:
                 divided.add((0,y))
                 for j in divide_result:
                     pairs.append(j)
-            else:
-                effect+=pairs_divide(aim,left_stars)
+            else:#融入数对
+                if pairs_divide(aim,left_stars)>0:
+                    effect+=pairs_divide(aim,left_stars)
+                else:#弱化版一步假设
+                    divide_result=divide(aim,left_stars+1)
+                    if divide_result:#只多一个
+                        for y1 in (y-1,y+1):
+                            if 0<=y1<size:
+                                for x in range(size):
+                                    if grid[y1][x]==-1:
+                                        aim1=aim[:]
+                                        for i in aim1[:]:
+                                            if -1<=i[0]-y1<=1 and -1<=i[1]-x<=1:
+                                                aim1.remove(i)
+                                        divide_result=divide(aim1,left_stars-1)
+                                        if divide_result:#减没了！
+                                            grid[y1][x]=0
+                                            effect+=1
 
     for x in range(size):#单列考虑
         if (1,x) not in divided:#还活着
@@ -406,8 +445,24 @@ while effect>0:
                 divided.add((1,x))
                 for j in divide_result:
                     pairs.append(j)
-            else:
-                effect+=pairs_divide(aim,left_stars)
+            else:#融入数对
+                if pairs_divide(aim,left_stars)>0:
+                    effect+=pairs_divide(aim,left_stars)
+                else:#弱化版一步假设
+                    divide_result=divide(aim,left_stars+1)
+                    if divide_result:#只多一个
+                        for x1 in (x-1,x+1):
+                            if 0<=x1<size:
+                                for y in range(size):
+                                    if grid[y][x1]==-1:
+                                        aim1=aim[:]
+                                        for i in aim1[:]:
+                                            if -1<=i[0]-y<=1 and -1<=i[1]-x1<=1:
+                                                aim1.remove(i)
+                                        divide_result=divide(aim1,left_stars-1)
+                                        if divide_result:#减没了！
+                                            grid[y][x1]=0
+                                            effect+=1
     
     for y in range(size-1):#双行考虑
         if (3,y) not in divided:#还活着
@@ -476,45 +531,5 @@ while effect>0:
             if i_del==1:
                 pairs.remove(i)
 
-    '''
-    # 容量防御定理 (Overkill Elimination / 鸽巢过杀排斥)
-    # 1. 扫描每一行，检查它上下的邻居
-    for r in range(size):
-        rem_stars = stars - grid[r].count(1)
-        empty_in_row = [c for c in range(size) if grid[r][c] == -1]
-        
-        # 只有当这一行处于"高度紧绷"状态时触发 (剩下的空格没比缺的星星多几个)
-        if len(empty_in_row) >= rem_stars > 0:
-            # 检查直接挨着这一行的上一行 (r-1) 和 下一行 (r+1)
-            for adj_r in (r - 1, r + 1):
-                if 0 <= adj_r < size:
-                    for adj_c in range(size):
-                        # 如果邻居是个未决的空格
-                        if grid[adj_r][adj_c] == -1:
-                            # 算算看：如果在这个邻居放星星，会同时炸死当前行里的几个空格？
-                            # (只要列坐标差值 <= 1，就会被八邻域辐射杀死)
-                            killed = [c for c in empty_in_row if abs(c - adj_c) <= 1]
-                            
-                            # 💥 触发容量过杀！杀得太狠导致当前行连星数都凑不齐了！
-                            if len(empty_in_row) - len(killed) < rem_stars:
-                                grid[adj_r][adj_c] = 0  # 绿圈当场暴毙！填 0 (打叉 ❌)！
-                                effect += 1
-
-    # 2. 扫描每一列，检查它左右的邻居 (完全镜像对称！)
-    for c in range(size):
-        col_vals = [grid[r][c] for r in range(size)]
-        rem_stars = stars - col_vals.count(1)
-        empty_in_col = [r for r in range(size) if grid[r][c] == -1]
-        
-        if len(empty_in_col) >= rem_stars > 0:
-            for adj_c in (c - 1, c + 1):
-                if 0 <= adj_c < size:
-                    for adj_r in range(size):
-                        if grid[adj_r][adj_c] == -1:
-                            killed = [r for r in empty_in_col if abs(r - adj_r) <= 1]
-                            if len(empty_in_col) - len(killed) < rem_stars:
-                                grid[adj_r][adj_c] = 0
-                                effect += 1
-    '''
 
 show_star_battle(regions, grid)
