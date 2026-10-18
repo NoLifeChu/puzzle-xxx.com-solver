@@ -23,6 +23,7 @@
 6. 黑白 2026/10/13
 7. 黑白+ 2026/10/13
 8. 星之战 2026/10/14
+9. 温度计（含弯曲） 2026/10/18
 
 ## 🗺️ 后续计划
 1. [ ] 实现更多谜题的求解器；
@@ -59,6 +60,7 @@ Daily/Weekly/Monthly Challenges: (Early solvers do not yet have an automatic cra
 6. binairo
 7. binairo+
 8. starbattle
+9. thermometers(includes curved)
 
 ## 🗺️ Pie in the Sky
 1. [ ] Implement more puzzle solvers;
