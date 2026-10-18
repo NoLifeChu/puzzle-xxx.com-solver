@@ -25,6 +25,10 @@
 8. 星之战 2026/10/14
 9. 温度计（含弯曲） 2026/10/18
 
+## ❌ 不会收录的谜题
+1. 数独：市面上已经有足够多更强大的求解器，如SE、[sudoku.coach](sudoku.coach)
+2. 拼单词：缺少词库，能拼的单词毫无规律
+
 ## 🗺️ 后续计划
 1. [ ] 实现更多谜题的求解器；
 2. [x] 实现自动抓取网页谜题，优化控制台——输入抓取代码——粘贴到求解器的步骤；
@@ -61,6 +65,10 @@ Daily/Weekly/Monthly Challenges: (Early solvers do not yet have an automatic cra
 7. binairo+
 8. starbattle
 9. thermometers(includes curved)
+
+## ❌ Puzzles That Will Not Be Included
+1. Sudoku: There are already plenty of more powerful solvers available, such as SE and [sudoku.coach](sudoku.coach).
+2. Boggle: These lack a proper word list, and the words that can be formed follow no discernible pattern.
 
 ## 🗺️ Pie in the Sky
 1. [ ] Implement more puzzle solvers;
