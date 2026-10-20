@@ -24,6 +24,7 @@
 7. 黑白+ 2026/10/13
 8. 星之战 2026/10/14
 9. 温度计（含弯曲） 2026/10/18
+10. 数邻 2026/10/20
 
 ## ❌ 不会收录的谜题
 1. 数独：市面上已经有足够多更强大的求解器，如SE、[sudoku.coach](sudoku.coach)
@@ -65,6 +66,7 @@ Daily/Weekly/Monthly Challenges: (Early solvers do not yet have an automatic cra
 7. binairo+
 8. starbattle
 9. thermometers(includes curved)
+10. dominosa
 
 ## ❌ Puzzles That Will Not Be Included
 1. Sudoku: There are already plenty of more powerful solvers available, such as SE and [sudoku.coach](sudoku.coach).
