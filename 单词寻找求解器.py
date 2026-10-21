@@ -156,23 +156,33 @@ size = 20
 grid = [["W","G","C","N","O","T","H","I","N","G","N","E","S","S","H","H","V","F","B","E"],["Z","N","O","Y","M","I","Z","A","M","O","U","J","L","S","G","D","N","I","X","T"],["L","D","F","H","D","U","M","U","I","Y","S","T","E","R","E","O","B","M","T","M"],["E","B","I","E","C","E","A","T","T","E","S","T","E","D","I","L","K","G","A","S"],["L","M","O","S","L","I","C","O","N","S","E","C","U","T","I","V","E","L","Y","Y"],["Q","U","X","D","Q","E","C","O","D","M","I","C","A","O","T","K","L","R","T","Q"],["T","E","D","D","R","U","H","P","N","A","R","C","G","R","G","X","X","I","I","B"],["Y","I","H","I","O","T","A","O","S","T","I","R","I","E","E","U","L","R","E","W"],["M","S","D","S","T","T","R","L","E","F","A","D","G","L","E","I","A","E","N","X"],["P","E","O","G","A","O","A","A","I","P","D","M","N","A","B","K","Y","S","E","K"],["R","V","L","R","R","U","C","R","H","F","D","X","I","A","T","U","U","P","G","H"],["U","I","P","U","A","U","T","I","W","M","Y","M","L","N","M","R","P","I","O","I"],["R","T","H","N","P","C","E","S","Y","L","A","I","K","G","A","B","A","R","M","H"],["P","A","I","T","E","S","R","A","T","T","A","I","N","E","D","T","O","A","O","S"],["C","R","N","L","S","B","I","T","F","V","R","L","I","G","R","S","I","T","H","P"],["H","E","E","E","I","O","S","I","A","D","H","X","W","G","C","R","B","O","G","K"],["I","P","C","D","R","Z","T","O","S","S","O","V","T","O","M","K","W","R","N","A"],["N","M","L","O","G","B","I","N","C","Q","I","B","P","J","V","M","I","O","R","X"],["G","I","T","R","E","B","C","N","P","D","Y","E","C","Q","A","S","W","S","N","Q"],["L","A","S","E","Z","M","U","E","G","A","S","I","V","N","E","S","I","L","G","T"]]
 target = {"ATTAINED":[],"ATTESTED":[],"BIBLIOGRAPHIES":[],"BIOAVAILABILITY":[],"CHARACTERISTIC":[],"CONSECUTIVE":[],"CONSECUTIVELY":[],"DECONTAMINATION":[],"DIRT":[],"DISGRUNTLED":[],"DISQUALIFYING":[],"DOLPHIN":[],"ELECTRIFICATION":[],"ENVISAGE":[],"GEEK":[],"HIDEOUT":[],"HOMOGENEITY":[],"HOROSCOPES":[],"IMPERATIVES":[],"KNOWS":[],"LAYUP":[],"MANDI":[],"MICA":[],"MIDDLEMAN":[],"NARC":[],"NODE":[],"NOTHINGNESS":[],"POLARISATION":[],"PUBLICIST":[],"REDIRECTION":[],"RESPIRATOR":[],"SCARE":[],"SEPARATOR":[],"SHOWMAN":[],"STEREO":[],"TAOS":[],"TEACUP":[],"TWINKLING":[],"UTILIZING":[],"WIRELESS":[]}
 
-#史上最简单的求解器
+#史上最简单的求解器，给出两个等价版本，恰好都是12行；运行时使用其中一个即可
+#递归版
 def digui(word,v,i,j,l):
     if l==len(word):
         return True
     if 0<=i<size and 0<=j<size and grid[i][j]==word[l]:#仔细看能看到短路求值
         return digui(word,v,i+v[0],j+v[1],l+1)
     return False
-vector=[]
-for i, j in product(range(-1,2), range(-1,2)):#甚至写成vector=[(1,0),(-1,0),(0,1),(0,-1),(1,1),(1,-1),(-1,1),(-1,-1)]还能省三行
-    if (i,j)!=(0,0):
-        vector.append((i,j))
-print(vector)
+vector=[(1,0),(-1,0),(0,1),(0,-1),(1,1),(1,-1),(-1,1),(-1,-1)]
 for word in target:#解这个单词
     for i, j in product(range(size), range(size)):#扫描每个格子周围
         for v in vector:
             if digui(word,v,i,j,0):
                 target[word]=((i,j),v,len(word))#若某单词有多个答案，会全部找出，但只有最后一个保存
 
+#循环版
+vector=[(1,0),(-1,0),(0,1),(0,-1),(1,1),(1,-1),(-1,1),(-1,-1)]
+for word in target:#解这个单词
+    for i, j in product(range(size), range(size)):#扫描每个格子周围
+        for v in vector:
+            di,dj=i,j
+            for l in range(len(word)):
+                if 0<=di<size and 0<=dj<size and grid[di][dj]==word[l]:#仔细看能看到短路求值
+                    di,dj=di+v[0],dj+v[1]
+                else:
+                    break
+            else:
+                target[word]=((i,j),v,len(word))#若某单词有多个答案，会全部找出，但只有最后一个保存
 
 show_word_search(size, grid, target)
