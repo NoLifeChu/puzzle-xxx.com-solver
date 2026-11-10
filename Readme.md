@@ -42,7 +42,7 @@
 
 ## 🔵 其他
 1. 本仓库纯属自娱自乐，你（若真的有人来看）可能会发现各种离谱内容；虽然该求解器相对很慢，但你不应该用它来进行人类账号竞速；
-2. 求解器目前只写到恰能求解网站的每日/每周/每月挑战的水平，可能无法完全求解更高难度的谜题；
+2. 求解器目前只写到恰能求解网站的每日/每周/每月挑战的水平，可能无法完全求解更高难度的谜题；对于一些每日/每周/每月挑战难度高的谜题，求解器也可能无法完全求解；
 3. 前端 DOM 数据提取器（.js）由 AI 辅助逆向并生成。
 
 # Puzzle Solver
@@ -89,5 +89,5 @@ Daily/Weekly/Monthly Challenges: (Early solvers do not yet have an automatic cra
 
 ## 🔵 Notes
 1. This repository is purely for my own amusement; you (if anyone actually visits) might find all sorts of outrageous content;Although this solver is relatively slow, you should not use it for human account speedruns;
-2. The solver is currently only capable of solving the daily/weekly/monthly challenges on the website, and may not be able to fully solve puzzles of higher difficulty.
+2. The solver is currently developed only to the extent required to solve the daily/weekly/monthly challenges found on the website; it may not be capable of fully solving more difficult puzzles, including some of the more challenging daily/weekly/monthly puzzles.
 3. DOM extraction scripts assisted by AI.
