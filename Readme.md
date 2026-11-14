@@ -31,6 +31,7 @@
 14. 阴阳 2026/11/3
 15. 珍珠 2026/11/10
 16. 信号旗 2026/11/12
+17. 划斜线 2026/11/14
 
 ## ❌ 不会收录的谜题
 1. 数独：市面上已经有足够多更强大的求解器，如SE、[sudoku.coach](sudoku.coach)
@@ -39,7 +40,7 @@
 ## 🗺️ 后续计划
 1. [ ] 实现更多谜题的求解器；
 2. [x] 实现自动抓取网页谜题，优化控制台——输入抓取代码——粘贴到求解器的步骤；
-3. [ ] 统一各个求解器的规范，如输出信息、可视化页面等。
+3. [ ] 统一各个求解器的规范，如输出信息、可视化页面等。（全部求解器制作完毕后我将进行一次重制，这些都会在重制版中完成）
 
 ## 🔵 其他
 1. 本仓库纯属自娱自乐，你（若真的有人来看）可能会发现各种离谱内容；虽然该求解器相对很慢，但你不应该用它来进行人类账号竞速；
@@ -79,6 +80,7 @@ Daily/Weekly/Monthly Challenges: (Early solvers do not yet have an automatic cra
 14. yinyang
 15. masyu
 16. shingoki
+17. slant
 
 ## ❌ Puzzles That Will Not Be Included
 1. Sudoku: There are already plenty of more powerful solvers available, such as SE and [sudoku.coach](sudoku.coach).
@@ -87,7 +89,7 @@ Daily/Weekly/Monthly Challenges: (Early solvers do not yet have an automatic cra
 ## 🗺️ Pie in the Sky
 1. [ ] Implement more puzzle solvers;
 2. [x] Implement automatic scraping of web page puzzles, optimizing the console input—entering scraping code—pasting to the solver steps;
-3. [ ] Standardize the specifications of various solvers, such as output information and visualization pages.
+3. [ ] Standardize the specifications of various solvers, such as output information and visualization pages.(Once all the solvers are finished, I will create a remake; all of these will be included in that version.)
 
 ## 🔵 Notes
 1. This repository is purely for my own amusement; you (if anyone actually visits) might find all sorts of outrageous content;Although this solver is relatively slow, you should not use it for human account speedruns;
